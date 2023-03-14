@@ -3,7 +3,18 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Ground
+  - Enemy
+  - Projectile
+  - EnemyHitbox
+  - Map
+  - Platform
+  - Fan
+  - Box
+  - Start
+  - Checkpoint
+  - End
   layers:
   - Default
   - TransparentFX
@@ -11,9 +22,9 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
-  - 
+  - Player
+  - Objects
+  - World
   - 
   - 
   - 
@@ -40,4 +51,10 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Player
+    uniqueID: 1130542843
+    locked: 0
+  - name: Objects
+    uniqueID: 3149039619
     locked: 0
