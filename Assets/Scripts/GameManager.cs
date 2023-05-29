@@ -1,17 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SocialPlatforms.Impl;
 
 public class GameManager : MonoBehaviour
 {
+    [SerializeField] int levelNumber;
     PlayerController thePlayer;
     int playerLives = 0;
     int playerHP = 4;
     int playerScore = 0;
+    float livesMultiplyer = 16;
+    float hpMultiplyer = 1.4f;
+    int totalScore;
+
     bool canTakeDamage = false;
     bool isGamePaused;
+    //bool isLevelComplete;
 
     UIManager theUiManager;
+    LevelSavingManager theLSM;
 
     public bool CanTakeDamage
     {
@@ -37,11 +45,33 @@ public class GameManager : MonoBehaviour
         set { playerScore = value; }
     }
 
+    public float LivesMultiplyer
+    {
+        get { return livesMultiplyer; }
+    }
+
+    public float HpMultiplyer
+    {
+        get { return hpMultiplyer; }
+    }
+
+    public int TotalScore
+    {
+        get { return totalScore; }
+    }
+
     public bool IsGamePaused
     {
         get { return isGamePaused; }
         set { isGamePaused = value; }
     }
+
+    /*
+    public bool IsLevelComplete
+    {
+        get { return isLevelComplete; }
+        set { isLevelComplete = value; }
+    }*/
 
 
 
@@ -49,14 +79,26 @@ public class GameManager : MonoBehaviour
     {
         thePlayer = GameObject.FindObjectOfType<PlayerController>();
         theUiManager = GameObject.FindObjectOfType<UIManager>();
+        theLSM = GameObject.FindObjectOfType<LevelSavingManager>();
         canTakeDamage = true;
         isGamePaused = false;
+        StartCoroutine(LevelStartCo());
+        //isLevelComplete = false;
     }
 
     // Update is called once per frame
     void Update()
     {
         ConvertHP();
+        /*
+        if (isLevelComplete)
+        {
+        thePlayer.IsLevelComplete = true;
+            canTakeDamage = false;
+            theUiManager.IsLevelComplete = true;
+            totalScore = Multiply(playerLives, livesMultiplyer) + Multiply(playerHP, hpMultiplyer) + playerScore;
+        }
+        */
     }
 
     void ConvertHP()
@@ -104,7 +146,7 @@ public class GameManager : MonoBehaviour
         UpdateStats();
         thePlayer.IsRespawning = true;
         yield return new WaitForSeconds(0.4f);//player death animation time
-        theUiManager.SetFadeScreenActive();
+        //theUiManager.SetFadeScreenActive();
         theUiManager.FadeToBlack();
         yield return new WaitForSeconds(1.8f);//fade to black time
         theUiManager.FadeFromBlack();
@@ -120,8 +162,29 @@ public class GameManager : MonoBehaviour
             playerLives = 0;
             thePlayer.IsAlive = false;
         }
+        theUiManager.IsGameOver = true;
 
         UpdateStats();
+    }
+
+    IEnumerator LevelStartCo()
+    {
+        thePlayer.CanMove = false;
+        yield return new WaitForSeconds(0.5f);
+        theUiManager.FadeFromBlack();
+        thePlayer.IsSpawning = true;
+        yield return new WaitForSeconds(1.5f);
+        theUiManager.CanUsePauseMenu = true;
+        thePlayer.CanMove = true;
+    }
+
+    public void LevelComplete()
+    {
+        thePlayer.IsLevelComplete = true;
+        canTakeDamage = false;
+        theUiManager.IsLevelComplete = true;
+        totalScore = Multiply(playerLives, livesMultiplyer) + Multiply(playerHP, hpMultiplyer) + playerScore;
+        theLSM.UpdateLevelData(levelNumber, totalScore);
     }
 
     public void UpdateStats()
@@ -129,6 +192,11 @@ public class GameManager : MonoBehaviour
         theUiManager.UpdateLives();
         theUiManager.UpdateHP();
         theUiManager.UpdateScore();
+    }
+
+    int Multiply(int variable, float multiplyer)
+    {
+        return Mathf.RoundToInt(variable * multiplyer);
     }
 
 }

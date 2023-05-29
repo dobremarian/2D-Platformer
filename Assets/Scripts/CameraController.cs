@@ -5,8 +5,8 @@ using UnityEngine.U2D.IK;
 
 public class CameraController : MonoBehaviour
 {
-    private float xLimit = 6.56f;
-    private float yLimit = 2.15f;
+    [SerializeField] float xLimit = 6.56f;
+    [SerializeField] float yLimit = 2.15f;
     private float yOffset = 0.8f;
 
     private Vector2 velocity = Vector2.zero;

@@ -5,7 +5,6 @@ using UnityEngine;
 public class CheckpointController : MonoBehaviour
 {
     [SerializeField] GameObject startPoint;
-    [SerializeField] GameObject endPoint;
     [SerializeField] GameObject[] checkpoints;
 
     Vector2 spawnPoint;
@@ -20,7 +19,7 @@ public class CheckpointController : MonoBehaviour
     {
         if(startPoint != null)
         {
-            spawnPoint = startPoint.transform.position;
+            spawnPoint = new Vector2(startPoint.transform.position.x + 0.107f, startPoint.transform.position.y);
         }
     }
 

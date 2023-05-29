@@ -9,6 +9,30 @@ public class AudioManager : MonoBehaviour
     [SerializeField] AudioSource shootSfx;
     [SerializeField] AudioSource levelComplete, gameOver;
 
+    [SerializeField] int levelMusic;
+
+    bool startMusicCo = false;
+
+    void Update()
+    {
+        if(!startMusicCo)
+        {
+            StartCoroutine(PlayLevelMusicCo());
+        }
+    }
+
+    IEnumerator PlayLevelMusicCo()
+    {
+        startMusicCo = true;
+        yield return new WaitForSeconds(0.8f);
+        music[levelMusic].Play();
+    }
+
+    public void StopLevelMusic()
+    {
+        music[levelMusic].Stop();
+    }
+
     public void PlayShootSFX()
     {
         shootSfx.Stop();

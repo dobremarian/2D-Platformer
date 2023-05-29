@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
     private float knockbackTime = 0.3f;
     private float knockbackCounter;
     private bool isAlive;
+    private bool isSpawning;
     private bool isRespawning;
     private bool isDamaged;
     private bool isGrounded = true;
@@ -18,7 +19,9 @@ public class PlayerController : MonoBehaviour
     private bool canDoubleJump = true;
     private bool canMove = false;
     private bool isFacingRight = true;
+    private bool isLevelComplete = false;
     bool startDeathCo;
+    bool startSpawnCo;
     bool startRespawnCo;
     private Rigidbody2D playerRB;
     private SpriteRenderer playerSR;
@@ -37,10 +40,20 @@ public class PlayerController : MonoBehaviour
     AudioManager theAudioManager;
     CheckpointController theCheckPointCtrl;
 
+    public bool CanMove
+    {
+        set { canMove = value; }
+    }
+
     public bool IsAlive
     {
         get { return isAlive; }
         set { isAlive = value; }
+    }
+
+    public bool IsSpawning
+    {
+        set { isSpawning = value; }
     }
 
     public bool IsRespawning
@@ -66,6 +79,11 @@ public class PlayerController : MonoBehaviour
         set { isDamaged = value; }
     }
 
+    public bool IsLevelComplete
+    {
+        set { isLevelComplete = value; }
+    }
+
     void Start()
     {
         playerRB = GetComponent<Rigidbody2D>();
@@ -78,9 +96,10 @@ public class PlayerController : MonoBehaviour
 
         isAlive = true;
         isRespawning = false;
+        startSpawnCo = false;
         startDeathCo = false;
         startRespawnCo = false;
-        canMove = true;
+        canMove = false;
     }
 
 
@@ -106,10 +125,21 @@ public class PlayerController : MonoBehaviour
 
             }
 
+            if(isSpawning)
+            {
+                canMove = false;
+                StartCoroutine(PlayerSpawnCo());
+            }
+
             if(isRespawning)
             {
                 canMove = false;
                 StartCoroutine(PlayerRespawnCo());
+            }
+
+            if(isLevelComplete)
+            {
+                canMove = false;
             }
 
             if (isDamaged)
@@ -239,6 +269,30 @@ public class PlayerController : MonoBehaviour
             playerAnim.Play("Player_Desappear");
             yield return new WaitForSeconds(1f);
             gameObject.SetActive(false);
+        }
+    }
+
+    IEnumerator PlayerSpawnCo()
+    {
+        if(!startSpawnCo)
+        {
+            startSpawnCo = true;
+            playerRB.constraints = RigidbodyConstraints2D.FreezeAll;
+            gameObject.GetComponent<SpriteRenderer>().enabled = false;
+            gameObject.transform.position = theCheckPointCtrl.SpawnPoint;
+            //theAudioManager.PlaySFX(8);
+            yield return new WaitForSeconds(0.2f);
+            gameObject.GetComponent<SpriteRenderer>().enabled = true;
+            playerAnim.Play("Player_Appear");
+            yield return new WaitForSeconds(0.6f);//respawn time for animation
+            playerRB.constraints = RigidbodyConstraints2D.None;
+            playerRB.constraints = RigidbodyConstraints2D.FreezeRotation;
+            playerRB.AddForce(Vector2.down);
+            theAudioManager.PlaySFX(8);
+            yield return new WaitForSeconds(0.1f);
+            canMove = true;
+            startSpawnCo = false;
+            isSpawning = false;
         }
     }
 

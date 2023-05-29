@@ -15,6 +15,7 @@ TagManager:
   - Start
   - Checkpoint
   - End
+  - LevelButton
   layers:
   - Default
   - TransparentFX
