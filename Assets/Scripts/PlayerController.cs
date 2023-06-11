@@ -24,6 +24,7 @@ public class PlayerController : MonoBehaviour
     bool startSpawnCo;
     bool startRespawnCo;
     private Rigidbody2D playerRB;
+    private Collider2D playerCollider;
     private SpriteRenderer playerSR;
     private Animator playerAnim;
 
@@ -93,6 +94,7 @@ public class PlayerController : MonoBehaviour
         theGM = GameObject.FindObjectOfType<GameManager>();
         theAudioManager = GameObject.FindObjectOfType<AudioManager>();
         theCheckPointCtrl = GameObject.FindObjectOfType<CheckpointController>();
+        playerCollider = GetComponent<Collider2D>();
 
         isAlive = true;
         isRespawning = false;
@@ -262,6 +264,8 @@ public class PlayerController : MonoBehaviour
     {
         if (!startDeathCo)
         {
+            playerRB.bodyType = RigidbodyType2D.Static;
+            playerCollider.isTrigger = true;
             theAudioManager.PlaySFX(9);
             startDeathCo = true;
             yield return new WaitForSeconds(0.1f);
@@ -300,6 +304,8 @@ public class PlayerController : MonoBehaviour
     {
         if(!startRespawnCo)
         {
+            playerRB.bodyType = RigidbodyType2D.Static;
+            playerCollider.isTrigger = true;
             startRespawnCo = true;
             theAudioManager.PlaySFX(9);
             yield return new WaitForSeconds(0.2f);
@@ -321,6 +327,8 @@ public class PlayerController : MonoBehaviour
             isRespawning = false;
             canMove = true;
             startRespawnCo = false;
+            playerCollider.isTrigger = false;
+            playerRB.bodyType = RigidbodyType2D.Dynamic;
         }
 
     }

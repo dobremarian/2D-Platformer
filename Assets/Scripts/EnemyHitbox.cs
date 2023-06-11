@@ -26,7 +26,7 @@ public class EnemyHitbox : MonoBehaviour
         {
             enemy.HitboxHit(direction);
             enemy.TakeDamage();
-            Debug.Log("Hit");
+            //Debug.Log("Hit");
         }
     }
 }

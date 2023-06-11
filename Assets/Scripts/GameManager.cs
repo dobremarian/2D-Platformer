@@ -7,8 +7,8 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField] int levelNumber;
     PlayerController thePlayer;
-    int playerLives = 0;
-    int playerHP = 4;
+    int playerLives = 1;
+    int playerHP = 10;
     int playerScore = 0;
     float livesMultiplyer = 16;
     float hpMultiplyer = 1.4f;

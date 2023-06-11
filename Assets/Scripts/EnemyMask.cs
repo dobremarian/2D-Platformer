@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyBlue : MonoBehaviour
+public class EnemyMask : MonoBehaviour
 {
+
     Animator enemyPersonAnim;
     SpriteRenderer enemyPersonSprite;
     Rigidbody2D enemyPersonRb;
@@ -13,28 +14,25 @@ public class EnemyBlue : MonoBehaviour
     [SerializeField] int hp;
     [SerializeField] int damageToPlayer;
     [SerializeField] int score;
-    [SerializeField] int projectileDamage;
-    [SerializeField] float fireRate = 0.4f;
 
     [SerializeField] Transform leftPoint, rightPoint;
     [SerializeField] float moveSpeed;
     [SerializeField] float waitTime = 2f;
+    [SerializeField] float yPlayerRange = 1f;
+    float knockbackForce = 5f;
     float waitCountdown;
-    float knockbackForce = 2.1f;
+    //bool isOnGround = false;
+    bool canBeDamaged;
+    bool playerInRange;
     bool isHit = false;
-    bool isShooting = false;
-    bool isWaiting; 
+    bool isWaiting;
     bool isRight = true;
     Vector3 target;
 
-    [SerializeField] GameObject projectile;
-    [SerializeField] Transform firepointTR;
-    float xFireOffset = 0.15f;
-    float projectileSpeed = 3f;
-
-
     [SerializeField] GameObject desappearEffect;
     [SerializeField] List<GameObject> enemyDrops;
+
+    Transform playerTr;
     void Awake()
     {
         enemyPersonAnim = GetComponent<Animator>();
@@ -42,60 +40,57 @@ public class EnemyBlue : MonoBehaviour
         theAudioManager = GameObject.FindObjectOfType<AudioManager>();
         enemyPersonSprite = GetComponent<SpriteRenderer>();
         enemyPersonRb = GetComponent<Rigidbody2D>();
-        
+        playerTr = GameObject.FindObjectOfType<PlayerController>().GetComponent<Transform>();
 
 
         waitCountdown = waitTime;
         isWaiting = true;
+        canBeDamaged = false;
+        playerInRange = false;
 
         rightPoint.parent = null;
         leftPoint.parent = null;
 
+        transform.position = leftPoint.transform.position;
+
         target = rightPoint.transform.position;
+
+        enemyPersonAnim.SetFloat("Speed_F", moveSpeed);
+        enemyPersonAnim.SetBool("Moving_B", false);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!theGM.IsGamePaused)
+        if ((playerTr.position.x < rightPoint.position.x && playerTr.position.x > leftPoint.position.x) && (playerTr.position.y < (rightPoint.position.y + yPlayerRange) && playerTr.position.x > (leftPoint.position.y - yPlayerRange)))
+        {
+            playerInRange = true;
+        }
+        else
+        {
+            playerInRange = false;
+            enemyPersonAnim.SetBool("Moving_B", false);
+        }
+        if (!theGM.IsGamePaused && playerInRange)
         {
             MoveEnemy();
         }
     }
-
-    void Fire()
+    /*void EnemyJump()
     {
-        //float fireForce;
-        Vector2 direction;
-
-        if (isRight)
+        if (isOnGround)
         {
-            direction = rightPoint.transform.position - gameObject.transform.position;
+            isOnGround = false;
+            enemyPersonRb.velocity = new Vector2(enemyPersonRb.velocity.x, jumpForce);
+            enemyPersonAnim.SetBool("isOnGround_B", false);
         }
-        else
-        {
-            direction = leftPoint.transform.position - gameObject.transform.position;
-        }
-        //theAudioManager.PlayShootSFX();
-        var projectile_ = Instantiate(projectile, firepointTR.position, firepointTR.rotation);
-        projectile_.GetComponent<Rigidbody2D>().velocity = new Vector2(direction.x, direction.y).normalized * projectileSpeed;
-        projectile_.GetComponent<EnemyProjectile>().DamageToPlayer = projectileDamage;
-    }
 
-    IEnumerator ShootCo()
-    {
-        isShooting = true;
-        Fire();
-        yield return new WaitForSeconds(fireRate);
-        isShooting = false;
-    }
+    }*/
 
     IEnumerator TakeDamageCo()
     {
         isHit = true;
-        hp--;
-        enemyPersonAnim.SetTrigger("Hit_T");
-        if(!isWaiting)
+        if (!isWaiting)
         {
             if (isRight)
             {
@@ -106,44 +101,51 @@ public class EnemyBlue : MonoBehaviour
                 enemyPersonRb.velocity = new Vector2(knockbackForce, enemyPersonRb.velocity.y);
             }
         }
-        if (hp == 0)
+        enemyPersonAnim.SetTrigger("Hit_T");
+
+        if (canBeDamaged)
         {
-            theAudioManager.PlaySFX(4);
-            Destroy(gameObject);
-            Instantiate(desappearEffect, gameObject.transform.position, desappearEffect.transform.rotation);
-            int rand = UnityEngine.Random.Range(0, enemyDrops.Count);
-            Instantiate(enemyDrops[rand], gameObject.transform.position, enemyDrops[rand].transform.rotation);
-            theGM.PlayerScore += score;
-            theGM.UpdateStats();
+            hp--;
+            if (hp == 0)
+            {
+                theAudioManager.PlaySFX(4);
+                Destroy(gameObject);
+                Instantiate(desappearEffect, gameObject.transform.position, desappearEffect.transform.rotation);
+                int rand = UnityEngine.Random.Range(0, enemyDrops.Count);
+                Instantiate(enemyDrops[rand], gameObject.transform.position, enemyDrops[rand].transform.rotation);
+                theGM.PlayerScore += score;
+                theGM.UpdateStats();
+            }
         }
-        yield return new WaitForSeconds(0.2f);
+
+        yield return new WaitForSeconds(1.2f);
         isHit = false;
     }
 
     void MoveEnemy()
     {
+
         if (waitCountdown > 0)
         {
             waitCountdown -= Time.deltaTime;
-            if(!isShooting)
-            {
-                StartCoroutine(ShootCo());
-            }
+
         }
         else
         {
             enemyPersonAnim.SetBool("Moving_B", true);
             isWaiting = false;
+            canBeDamaged = false;
             if (Vector3.Distance(transform.position, rightPoint.transform.position) < 0.01f)
             {
-                target = leftPoint.transform.position;
-                waitCountdown = waitTime;
-                isWaiting = true;
+
                 enemyPersonAnim.SetBool("Moving_B", false);
                 if (isRight)
                 {
+                    target = leftPoint.transform.position;
+                    waitCountdown = waitTime;
+                    canBeDamaged = true;
+                    isWaiting = true;
                     enemyPersonSprite.flipX = true;
-                    firepointTR.position = new Vector3(-xFireOffset + gameObject.transform.position.x, firepointTR.position.y, firepointTR.position.z);
                     isRight = false;
                 }
 
@@ -151,29 +153,34 @@ public class EnemyBlue : MonoBehaviour
             else if (Vector3.Distance(transform.position, leftPoint.transform.position) < 0.01f)
             {
 
-                target = rightPoint.transform.position;
-                waitCountdown = waitTime;
-                isWaiting = true;
+
                 enemyPersonAnim.SetBool("Moving_B", false);
                 if (!isRight)
                 {
+                    target = rightPoint.transform.position;
+                    waitCountdown = waitTime;
+                    canBeDamaged = true;
+                    isWaiting = true;
                     enemyPersonSprite.flipX = false;
-                    firepointTR.position = new Vector3(xFireOffset + gameObject.transform.position.x, firepointTR.position.y, firepointTR.position.z);
                     isRight = true;
                 }
             }
-            if(!isHit)
+            if (!isHit && !isWaiting)
             {
                 transform.position = Vector3.MoveTowards(transform.position, target, Time.deltaTime * moveSpeed);
-            }
 
+            }
         }
-        
+
+
     }
 
-    public void EnemyBlueTriggerHit()
+    public void EnemyMaskTriggerHit()
     {
-        StartCoroutine(TakeDamageCo());  
+        if (canBeDamaged)
+        {
+            StartCoroutine(TakeDamageCo());
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -181,10 +188,8 @@ public class EnemyBlue : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             theGM.DamagePlayer(damageToPlayer);
-            enemyPersonAnim.SetTrigger("Hit_T");
             StartCoroutine(TakeDamageCo());
         }
     }
-
 
 }

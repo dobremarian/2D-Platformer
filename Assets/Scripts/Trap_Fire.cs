@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class Trap_Fire : Trap
 {
+    [SerializeField] float fireDelayTime = 1f;
     bool isFireOn = false;
     bool canDealDamage = false;
-    float fireDelayTime = 1f;
     float fireOnTime = 2f;
     bool isInsideFire = false;
 

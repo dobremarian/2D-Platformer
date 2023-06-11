@@ -120,8 +120,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32cfb8ee6bb1a1d468cd52c9e4c77049, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthAmount: 1
-  scoreAmount: 1
+  healthAmount: 3
+  scoreAmount: 4
   desappearEffect: {fileID: 3254926078470966103, guid: 781215b9b7f23f549968e889a3702d30, type: 3}
 --- !u!50 &2447174985525444609
 Rigidbody2D:
