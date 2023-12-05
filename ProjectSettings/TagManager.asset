@@ -17,6 +17,7 @@ TagManager:
   - End
   - LevelButton
   - ProjectileEnemy
+  - GroundGCS
   layers:
   - Default
   - TransparentFX

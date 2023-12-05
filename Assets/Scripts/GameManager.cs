@@ -21,6 +21,10 @@ public class GameManager : MonoBehaviour
     UIManager theUiManager;
     LevelSavingManager theLSM;
 
+    public int LevelNumber
+    {
+        get { return levelNumber; }
+    }
     public bool CanTakeDamage
     {
         get { return canTakeDamage; }

@@ -10,6 +10,7 @@ public class EnemyMask : MonoBehaviour
     Rigidbody2D enemyPersonRb;
     GameManager theGM;
     AudioManager theAudioManager;
+    Transform playerTr;
 
     [SerializeField] int hp;
     [SerializeField] int damageToPlayer;
@@ -31,8 +32,7 @@ public class EnemyMask : MonoBehaviour
 
     [SerializeField] GameObject desappearEffect;
     [SerializeField] List<GameObject> enemyDrops;
-
-    Transform playerTr;
+    
     void Awake()
     {
         enemyPersonAnim = GetComponent<Animator>();
@@ -62,7 +62,7 @@ public class EnemyMask : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if ((playerTr.position.x < rightPoint.position.x && playerTr.position.x > leftPoint.position.x) && (playerTr.position.y < (rightPoint.position.y + yPlayerRange) && playerTr.position.x > (leftPoint.position.y - yPlayerRange)))
+        if ((playerTr.position.x < rightPoint.position.x && playerTr.position.x > leftPoint.position.x) && ((playerTr.position.y < (rightPoint.position.y + yPlayerRange)) && (playerTr.position.y > (leftPoint.position.y - yPlayerRange))))
         {
             playerInRange = true;
         }

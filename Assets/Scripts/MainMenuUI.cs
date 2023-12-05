@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class MainMenuUI : MonoBehaviour
 {
-    [SerializeField] GameObject continueButton, newGameButton;
+    [SerializeField] GameObject continueButton;
+    //[SerializeField] GameObject newGameButton;
     [SerializeField] GameObject pauseMenu, volumeMenu;
     LevelSavingManager theLSM;
     LevelData levelOneData;
@@ -116,5 +118,14 @@ public class MainMenuUI : MonoBehaviour
     {
         volumeMenu.SetActive(false);
         pauseMenu.SetActive(true);
+    }
+
+    public void QuitGame()
+    {
+#if UNITY_EDITOR
+        EditorApplication.ExitPlaymode();
+#else
+        Application.Quit();
+#endif
     }
 }

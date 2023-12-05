@@ -10,6 +10,11 @@ public class LevelSavingManager : MonoBehaviour
     List<LevelData> levelsList = new List<LevelData>();
     string filePath = "/LevelSavings.gd";
 
+    public int NumberOfLevels
+    {
+        get { return numberOfLevels; }
+    }
+
     void Awake()
     {
         string path = Application.dataPath + filePath;
@@ -22,6 +27,7 @@ public class LevelSavingManager : MonoBehaviour
         {
             NewSaveList();
         }
+        //Debug.Log(levelsList.Count);
     }
 
     public void NewSaveList()
@@ -42,11 +48,14 @@ public class LevelSavingManager : MonoBehaviour
         levelsList[levelNuber - 1].IsComplete = true;
         levelsList[levelNuber - 1].LevelScore = score;
 
-        if(!levelsList[levelNuber].IsUnlocked && levelNuber != levelsList.Count)
+        if(levelNuber != levelsList.Count)
         {
-            levelsList[levelNuber].IsUnlocked = true;
+            if (!levelsList[levelNuber].IsUnlocked)
+            {
+                levelsList[levelNuber].IsUnlocked = true;
+            }
         }
-
+        
         SaveLevelsDataFile();
     }
 

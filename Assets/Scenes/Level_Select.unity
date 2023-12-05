@@ -582,7 +582,7 @@ MonoBehaviour:
   listIndex: 0
   levelToLoad: Level_1
   selectBorder: {fileID: 1817236296}
-  levelPreviewImage: {fileID: 21300000, guid: e335443f3373c234083ac49aeb734c49, type: 3}
+  levelPreviewImage: {fileID: 21300000, guid: 0449a323aedbb644caedf6ced56fbfd9, type: 3}
 --- !u!1 &228613088
 GameObject:
   m_ObjectHideFlags: 0
@@ -786,9 +786,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   listIndex: 5
-  levelToLoad: 
+  levelToLoad: Level_6
   selectBorder: {fileID: 324423273}
-  levelPreviewImage: {fileID: 21300000, guid: 09686f0a2a20fa645bea2bb278f932c5, type: 3}
+  levelPreviewImage: {fileID: 21300000, guid: fd57c541d3f5d0b46871ad896b0db376, type: 3}
 --- !u!1001 &298468039
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2582,9 +2582,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   listIndex: 3
-  levelToLoad: 
+  levelToLoad: Level_4
   selectBorder: {fileID: 1823054386}
-  levelPreviewImage: {fileID: 21300000, guid: 8fec603c9b956cb478b255fceb9726c1, type: 3}
+  levelPreviewImage: {fileID: 21300000, guid: b5bcf3ac40d2b4a47af435396d867d36, type: 3}
 --- !u!1 &1034499303
 GameObject:
   m_ObjectHideFlags: 0
@@ -2726,6 +2726,7 @@ MonoBehaviour:
   pauseMenu: {fileID: 7814340144587437706}
   volumeMenu: {fileID: 998554589}
   fadeScreen: {fileID: 298468040}
+  mainMenuScene: Main_Menu
 --- !u!1 &1212857452
 GameObject:
   m_ObjectHideFlags: 0
@@ -2884,9 +2885,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   listIndex: 1
-  levelToLoad: 
+  levelToLoad: Level_2
   selectBorder: {fileID: 413800079}
-  levelPreviewImage: {fileID: 21300000, guid: 9187ef29f8b38c64890549d769b79867, type: 3}
+  levelPreviewImage: {fileID: 21300000, guid: 2718710772e7eda4f95be16b9df84b69, type: 3}
 --- !u!1 &1232865922
 GameObject:
   m_ObjectHideFlags: 0
@@ -3220,9 +3221,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   listIndex: 4
-  levelToLoad: 
+  levelToLoad: Level_5
   selectBorder: {fileID: 1466671133}
-  levelPreviewImage: {fileID: 21300000, guid: 6a7c67d913f794b4c84b4b968d1cffa0, type: 3}
+  levelPreviewImage: {fileID: 21300000, guid: 888406b79299d404e9b3ac73136dc256, type: 3}
 --- !u!1 &1377059425
 GameObject:
   m_ObjectHideFlags: 0
@@ -3573,9 +3574,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   listIndex: 7
-  levelToLoad: 
+  levelToLoad: Level_8
   selectBorder: {fileID: 930189579}
-  levelPreviewImage: {fileID: 21300000, guid: 610d221c78689ed4cb840c61c6446b2b, type: 3}
+  levelPreviewImage: {fileID: 21300000, guid: 39dae5ff10f191043a5efa480d6d0932, type: 3}
 --- !u!1 &1461460453
 GameObject:
   m_ObjectHideFlags: 0
@@ -37136,9 +37137,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   listIndex: 2
-  levelToLoad: 
+  levelToLoad: Level_3
   selectBorder: {fileID: 959324869}
-  levelPreviewImage: {fileID: 21300000, guid: f669473f1c632294189fef8c1dbb29c2, type: 3}
+  levelPreviewImage: {fileID: 21300000, guid: 4fdb67e0445b20441a1c9c759d597683, type: 3}
 --- !u!1 &1633421451
 GameObject:
   m_ObjectHideFlags: 0
@@ -37393,9 +37394,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   listIndex: 9
-  levelToLoad: 
+  levelToLoad: Level_10
   selectBorder: {fileID: 119995860}
-  levelPreviewImage: {fileID: 21300000, guid: feb0480e61d2d16499798e9c7ff1437c, type: 3}
+  levelPreviewImage: {fileID: 21300000, guid: e71d7467ff9452c4b8ff31e38b9b4d27, type: 3}
 --- !u!1 &1779813771
 GameObject:
   m_ObjectHideFlags: 0
@@ -37646,9 +37647,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   listIndex: 6
-  levelToLoad: 
+  levelToLoad: Level_7
   selectBorder: {fileID: 590270341}
-  levelPreviewImage: {fileID: 21300000, guid: 1d0c6857307f39c4489f4af69869c7f6, type: 3}
+  levelPreviewImage: {fileID: 21300000, guid: 7aec1369bdfdf0c48b1f8f9ea0f34936, type: 3}
 --- !u!1 &1817236296
 GameObject:
   m_ObjectHideFlags: 0
@@ -37991,9 +37992,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   listIndex: 8
-  levelToLoad: 
+  levelToLoad: Level_9
   selectBorder: {fileID: 1779813771}
-  levelPreviewImage: {fileID: 21300000, guid: 91d41ba81cd60b54b87cce50a6322b24, type: 3}
+  levelPreviewImage: {fileID: 21300000, guid: 35463e0af46a7cb489ebd90481a0fb8d, type: 3}
 --- !u!1 &1940713804
 GameObject:
   m_ObjectHideFlags: 0
@@ -39092,13 +39093,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
+      - m_Target: {fileID: 1034499308}
+        m_TargetAssemblyTypeName: LevelSelectMenuUI, Assembly-CSharp
+        m_MethodName: LoadMainMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -39531,8 +39532,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+      - m_Target: {fileID: 1034499308}
+        m_TargetAssemblyTypeName: LevelSelectMenuUI, Assembly-CSharp
         m_MethodName: QuitGame
         m_Mode: 1
         m_Arguments:

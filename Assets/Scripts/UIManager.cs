@@ -10,6 +10,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] string currentSceneName;
     [SerializeField] string levelSelectSceneName;
     [SerializeField] string mainMenuSceneName;
+    [SerializeField] string gameCompleteSceneName;
 
     [SerializeField] Text livesText;
     [SerializeField] Text hpText;
@@ -23,6 +24,7 @@ public class UIManager : MonoBehaviour
     PlayerController thePlayer;
     GameManager theGM;
     AudioManager theAudioManager;
+    LevelSavingManager theLSM;
     [SerializeField] AudioVolumeManager theVolumeManager;
 
     bool isGameOver;
@@ -49,6 +51,7 @@ public class UIManager : MonoBehaviour
     {
         thePlayer = GameObject.FindObjectOfType<PlayerController>();
         theGM = GameObject.FindObjectOfType<GameManager>();
+        theLSM = GameObject.FindObjectOfType<LevelSavingManager>();
         theAudioManager = GameObject.FindObjectOfType<AudioManager>();
 
         UpdateLives();
@@ -209,12 +212,19 @@ public class UIManager : MonoBehaviour
 
     public void LoadLevelSelectMenu()
     {
-        StartCoroutine(LoadSceneCo(levelSelectSceneName));
+        if (theGM.LevelNumber != theLSM.NumberOfLevels)
+        {
+            StartCoroutine(LoadSceneCo(levelSelectSceneName));
+        }
+        else
+        {
+            StartCoroutine(LoadSceneCo(gameCompleteSceneName));
+        }
     }
 
     public void LoadMainMenu()
     {
-        StartCoroutine(LoadSceneCo(mainMenuSceneName));
+            StartCoroutine(LoadSceneCo(mainMenuSceneName));
     }
 
     IEnumerator LoadSceneCo(string sceneName)

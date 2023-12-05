@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEditor;
 
 public class LevelSelectMenuUI : MonoBehaviour
 {
@@ -39,6 +40,8 @@ public class LevelSelectMenuUI : MonoBehaviour
 
     bool isLoading = false;
     [SerializeField] Animator fadeScreen;
+
+    [SerializeField] string mainMenuScene;
 
     void Start()
     {
@@ -198,6 +201,20 @@ public class LevelSelectMenuUI : MonoBehaviour
         volumeMenu.SetActive(false);
         pauseMenu.SetActive(true);
         
+    }
+
+    public void LoadMainMenu()
+    {
+        StartCoroutine(LoadSceneCo(mainMenuScene));
+    }
+
+    public void QuitGame()
+    {
+#if UNITY_EDITOR
+        EditorApplication.ExitPlaymode();
+#else
+        Application.Quit();
+#endif
     }
 
     void FadeToBlack()

@@ -11706,8 +11706,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a78a333ee21adc4cb0ea3b2490d6c3c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xLimit: 6.56
-  yLimit: 2.15
+  xLimit: 10.65
+  yLimit: 4.34
   smoothTime: 0.09
 --- !u!1 &9012819124816552396
 GameObject:

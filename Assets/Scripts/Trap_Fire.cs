@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class Trap_Fire : Trap
 {
-    [SerializeField] float fireDelayTime = 1f;
+    [SerializeField] float fireOnTime = 2f;
+    float fireDelayTime = 1f;
     bool isFireOn = false;
     bool canDealDamage = false;
-    float fireOnTime = 2f;
     bool isInsideFire = false;
 
     Animator fireAnim;
@@ -37,13 +37,16 @@ public class Trap_Fire : Trap
 
     protected override void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.transform.CompareTag("Player") && !isFireOn)
+        if (other.gameObject.transform.CompareTag("Player"))
         {
-            fireAnim.SetTrigger("SwitchOn_T");
-            StartCoroutine(FireCo());
-            isFireOn = true;
+            isInsideFire = true;
+            if(!isFireOn)
+            {
+                fireAnim.SetTrigger("SwitchOn_T");
+                StartCoroutine(FireCo());
+                isFireOn = true;
+            }
         }
-        isInsideFire = true;
     }
 
 
