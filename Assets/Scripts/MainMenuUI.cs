@@ -20,23 +20,9 @@ public class MainMenuUI : MonoBehaviour
 
     void Start()
     {
-        volumeMenu.SetActive(true);
-        theAVM = FindObjectOfType<AudioVolumeManager>();
-        theAVM.LoadSliderValues();
-        volumeMenu.SetActive(false);
-        //theAM = FindObjectOfType<AudioManager>();
-        
-
         theLSM = FindObjectOfType<LevelSavingManager>();
-        
-        levelOneData = theLSM.GetLevelData(1);
-
-        if(!levelOneData.IsComplete)
-        {
-            continueButton.SetActive(false);
-        }
-        pauseMenu.SetActive(true);
-
+        theAVM = FindObjectOfType<AudioVolumeManager>();
+                
         StartCoroutine(StartSceneCo());
     }
 
@@ -67,32 +53,48 @@ public class MainMenuUI : MonoBehaviour
         fadeScreen.SetTrigger("IdleBlack_T");
     }*/
 
-    void FadeScreenSetActive(bool value)
+    void FadeScreenSetActive()
     {
-        fadeScreen.gameObject.SetActive(value);
+        fadeScreen.gameObject.SetActive(true);
         fadeScreen.SetTrigger("Idle_T");
     }
 
     IEnumerator LoadSceneCo(string sceneName)
     {
         //pauseMenu.SetActive(false);
-        FadeScreenSetActive(true);
+        FadeScreenSetActive(); //testBuild
         yield return new WaitForSeconds(0.05f);
-        FadeToBlack();
+        FadeToBlack(); //testBuild
         yield return new WaitForSeconds(2f);
         SceneManager.LoadScene(sceneName);
     }
 
     IEnumerator StartSceneCo()
     {
-        //pauseMenu.SetActive(false);
         //FadeScreenSetActive(true);
-        yield return new WaitForSeconds(0.05f);
-        FadeFromBlack();
-        yield return new WaitForSeconds(1f);
+        pauseMenu.SetActive(false);
+
+        levelOneData = theLSM.GetLevelData(1);
+        if (!levelOneData.IsComplete)
+        {
+            continueButton.SetActive(false);
+        }
+
+        volumeMenu.gameObject.SetActive(true);
+        theAVM.LoadSliderValues(); //testBuild
+        volumeMenu.gameObject.SetActive(false);
+
+        pauseMenu.SetActive(true);
+
+        //FadeScreenSetActive(true); //testBuild
+
+        //yield return new WaitForSeconds(0.05f);
+        FadeFromBlack(); //testBuild
+        yield return new WaitForSeconds(2f);
         //pauseMenu.SetActive(true);
-        yield return new WaitForSeconds(1f); ;
-        FadeScreenSetActive(false);
+        //yield return new WaitForSeconds(1f);
+        fadeScreen.gameObject.SetActive(false);
+        //FadeScreenSetActive(false); //testBuild
     }
 
     public void NewGame()

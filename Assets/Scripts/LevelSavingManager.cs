@@ -8,7 +8,10 @@ public class LevelSavingManager : MonoBehaviour
 {
     [SerializeField] int numberOfLevels;
     List<LevelData> levelsList = new List<LevelData>();
+    //string fileName = "LevelSavings.gd";
+    //string dirName = "PinkGuy_Game_Files";
     string filePath = "/LevelSavings.gd";
+    string path = "";
 
     public int NumberOfLevels
     {
@@ -16,8 +19,13 @@ public class LevelSavingManager : MonoBehaviour
     }
 
     void Awake()
-    {
-        string path = Application.dataPath + filePath;
+    {   
+        //filePath = Path.Combine(dirName, fileName);
+
+        //string path = Application.persistentDataPath + filePath;
+        path = Application.persistentDataPath + filePath;
+
+        //Debug.Log(path);
 
         if (File.Exists(path))
         {
@@ -67,7 +75,7 @@ public class LevelSavingManager : MonoBehaviour
     public void SaveLevelsDataFile()
     {
         List<LevelData> list = levelsList;
-        string path = Application.dataPath + filePath;
+        //string path = Application.persistentDataPath + filePath;
 
         BinaryFormatter bf = new BinaryFormatter();
         FileStream file = File.Create(path);
@@ -78,7 +86,7 @@ public class LevelSavingManager : MonoBehaviour
 
     public void LoadLevelsDataFile()
     {
-        string path = Application.dataPath + filePath;
+        //string path = Application.persistentDataPath + filePath;
         if (File.Exists(path))
         {
             BinaryFormatter bf = new BinaryFormatter();

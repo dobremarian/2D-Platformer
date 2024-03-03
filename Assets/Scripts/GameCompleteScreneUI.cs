@@ -55,7 +55,7 @@ public class GameCompleteScreneUI : MonoBehaviour
         yield return new WaitForSeconds(0.05f);
         FadeFromBlack();
         yield return new WaitForSeconds(1f);
-        yield return new WaitForSeconds(1f); ;
+        yield return new WaitForSeconds(1f);
         FadeScreenSetActive(false);
     }
 

@@ -32,6 +32,7 @@ public class LevelSelectMenuUI : MonoBehaviour
     float verticaltalImput;
 
     LevelSavingManager theLSM;
+    AudioVolumeManager theAVM;
     LevelData currentButtonData;
 
     [SerializeField] GameObject pauseMenu;
@@ -46,15 +47,11 @@ public class LevelSelectMenuUI : MonoBehaviour
     void Start()
     {
         theLSM = FindObjectOfType<LevelSavingManager>();
-
+        theAVM = FindObjectOfType<AudioVolumeManager>();
+        
         StartAssignments();
         ResizeMenuWindowHeight();
-
         isPaused = false;
-        pauseMenu.SetActive(false);
-        volumeMenu.SetActive(true);
-        volumeMenu.GetComponent<AudioVolumeManager>().LoadSliderValues();
-        volumeMenu.SetActive(false);
 
         levelButtons[buttonIndex].SelectButton();
         CurrentButtonUpdateUI();
@@ -253,6 +250,11 @@ public class LevelSelectMenuUI : MonoBehaviour
     {
         //pauseMenu.SetActive(false);
         //FadeScreenSetActive(true);
+        pauseMenu.SetActive(false);
+        volumeMenu.SetActive(true);
+        theAVM.LoadSliderValues();
+        volumeMenu.SetActive(false);
+
         isLoading = true;
         yield return new WaitForSeconds(0.05f);
         FadeFromBlack();

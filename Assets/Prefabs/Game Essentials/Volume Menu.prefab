@@ -243,7 +243,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8923438456693739664}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: AudioVolumeManager, Assembly-CSharp
         m_MethodName: SetGameVolume
         m_Mode: 0
@@ -1057,7 +1057,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8923438456693739664}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: AudioVolumeManager, Assembly-CSharp
         m_MethodName: SetSFXVolume
         m_Mode: 0
@@ -1462,7 +1462,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8923438456693739664}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: AudioVolumeManager, Assembly-CSharp
         m_MethodName: SetMusicVolume
         m_Mode: 0
@@ -2083,7 +2083,6 @@ GameObject:
   - component: {fileID: 8923438456693739671}
   - component: {fileID: 8923438456693739670}
   - component: {fileID: 8923438456693739669}
-  - component: {fileID: 8923438456693739664}
   m_Layer: 5
   m_Name: Volume Menu
   m_TagString: Untagged
@@ -2174,17 +2173,3 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &8923438456693739664
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8923438456693739675}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d34b7094445db3946a5b1dbba3362ad6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  volumeMixer: {fileID: 24100000, guid: 170e1c29a010b6543970a6977d348ff0, type: 2}
-  backButton: {fileID: 8923438456404990160}

@@ -13,12 +13,17 @@ public class AudioManager : MonoBehaviour
 
     bool startMusicCo = false;
 
-    void Update()
+    private void Start()
     {
-        if(!startMusicCo)
+        if (!startMusicCo)
         {
             StartCoroutine(PlayLevelMusicCo());
         }
+    }
+
+    void Update()
+    {
+        
     }
 
     IEnumerator PlayLevelMusicCo()

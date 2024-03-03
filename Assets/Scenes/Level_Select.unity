@@ -884,6 +884,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Fade Screen
       objectReference: {fileID: 0}
+    - target: {fileID: 1533101976321299798, guid: c832f1893c48b32439a1ea21ad5dcc63, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c832f1893c48b32439a1ea21ad5dcc63, type: 3}
 --- !u!95 &298468040 stripped
@@ -1342,6 +1346,14 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8923438454716617790, guid: af1f14402dd76814d9bfec390169428f, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1034499309}
+    - target: {fileID: 8923438454716617790, guid: af1f14402dd76814d9bfec390169428f, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetGameVolume
+      objectReference: {fileID: 0}
     - target: {fileID: 8923438455252554819, guid: af1f14402dd76814d9bfec390169428f, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -1402,6 +1414,14 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8923438455918556911, guid: af1f14402dd76814d9bfec390169428f, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1034499309}
+    - target: {fileID: 8923438455918556911, guid: af1f14402dd76814d9bfec390169428f, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetSFXVolume
+      objectReference: {fileID: 0}
     - target: {fileID: 8923438455969244959, guid: af1f14402dd76814d9bfec390169428f, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -1477,6 +1497,14 @@ PrefabInstance:
     - target: {fileID: 8923438456392147044, guid: af1f14402dd76814d9bfec390169428f, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8923438456392147045, guid: af1f14402dd76814d9bfec390169428f, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1034499309}
+    - target: {fileID: 8923438456392147045, guid: af1f14402dd76814d9bfec390169428f, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetMusicVolume
       objectReference: {fileID: 0}
     - target: {fileID: 8923438456404990160, guid: af1f14402dd76814d9bfec390169428f, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
@@ -1493,7 +1521,7 @@ PrefabInstance:
     - target: {fileID: 8923438456404990160, guid: af1f14402dd76814d9bfec390169428f, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 998554590}
+      objectReference: {fileID: 1034499309}
     - target: {fileID: 8923438456404990160, guid: af1f14402dd76814d9bfec390169428f, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
       value: 2
@@ -2413,17 +2441,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 8923438456693739675, guid: af1f14402dd76814d9bfec390169428f, type: 3}
   m_PrefabInstance: {fileID: 501878748}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &998554590 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8923438456693739664, guid: af1f14402dd76814d9bfec390169428f, type: 3}
-  m_PrefabInstance: {fileID: 501878748}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 998554589}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d34b7094445db3946a5b1dbba3362ad6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1009544803
 GameObject:
   m_ObjectHideFlags: 0
@@ -2598,6 +2615,7 @@ GameObject:
   - component: {fileID: 1034499305}
   - component: {fileID: 1034499304}
   - component: {fileID: 1034499308}
+  - component: {fileID: 1034499309}
   m_Layer: 5
   m_Name: Level Select UI
   m_TagString: Untagged
@@ -2727,6 +2745,22 @@ MonoBehaviour:
   volumeMenu: {fileID: 998554589}
   fadeScreen: {fileID: 298468040}
   mainMenuScene: Main_Menu
+--- !u!114 &1034499309
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1034499303}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d34b7094445db3946a5b1dbba3362ad6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  volumeMixer: {fileID: 24100000, guid: 170e1c29a010b6543970a6977d348ff0, type: 2}
+  gameSlider: {fileID: 632664519}
+  musicSlider: {fileID: 2056457851}
+  sfxSlider: {fileID: 674550883}
 --- !u!1 &1212857452
 GameObject:
   m_ObjectHideFlags: 0
@@ -38646,7 +38680,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 998554590}
+      - m_Target: {fileID: 1034499309}
         m_TargetAssemblyTypeName: AudioVolumeManager, Assembly-CSharp
         m_MethodName: LoadSliderValues
         m_Mode: 1

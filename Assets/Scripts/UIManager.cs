@@ -17,6 +17,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] Text scoreText;
     [SerializeField] GameObject gameUI;
     [SerializeField] GameObject pauseMenu;
+    [SerializeField] GameObject volumeMenu;
     [SerializeField] Animator fadeScreen;
     [SerializeField] GameObject gameOverScreen;
     [SerializeField] GameObject levelCopleteScreen;
@@ -24,8 +25,8 @@ public class UIManager : MonoBehaviour
     PlayerController thePlayer;
     GameManager theGM;
     AudioManager theAudioManager;
+    AudioVolumeManager theAVM;
     LevelSavingManager theLSM;
-    [SerializeField] AudioVolumeManager theVolumeManager;
 
     bool isGameOver;
     bool isLevelComplete;
@@ -53,21 +54,8 @@ public class UIManager : MonoBehaviour
         theGM = GameObject.FindObjectOfType<GameManager>();
         theLSM = GameObject.FindObjectOfType<LevelSavingManager>();
         theAudioManager = GameObject.FindObjectOfType<AudioManager>();
+        theAVM = GameObject.FindObjectOfType<AudioVolumeManager>();
 
-        UpdateLives();
-        UpdateHP();
-        UpdateScore();
-
-        pauseMenu.SetActive(false);
-
-        theVolumeManager.gameObject.SetActive(true);
-        theVolumeManager.LoadSliderValues();
-        theVolumeManager.gameObject.SetActive(false);
-        
-        gameOverScreen.SetActive(false);
-        levelCopleteScreen.SetActive(false);
-        isGameOver = false;
-        isLevelComplete = false;
     }
 
     // Update is called once per frame
@@ -134,7 +122,7 @@ public class UIManager : MonoBehaviour
         FadeScreenSetActive(false);
         theAudioManager.PlaySFX(6);
         pauseMenu.SetActive(true);
-        theVolumeManager.gameObject.SetActive(false);
+        volumeMenu.gameObject.SetActive(false);
         gameUI.SetActive(false);
         theGM.IsGamePaused = true;
         Time.timeScale = 0;
@@ -145,8 +133,8 @@ public class UIManager : MonoBehaviour
         FadeScreenSetActive(true);
         theAudioManager.PlaySFX(7);
         pauseMenu.SetActive(false);
-        theVolumeManager.SaveSliderValues();
-        theVolumeManager.gameObject.SetActive(false);
+        theAVM.SaveSliderValues();
+        volumeMenu.gameObject.SetActive(false);
         gameUI.SetActive(true);
         theGM.IsGamePaused = false;
         Time.timeScale = 1;
@@ -161,12 +149,12 @@ public class UIManager : MonoBehaviour
     public void VolumeMenuOpen()
     {
         pauseMenu.SetActive(false);
-        theVolumeManager.gameObject.SetActive(true);
+        volumeMenu.gameObject.SetActive(true);
     }
 
     public void VolumeMenuBackButton()
     {
-        theVolumeManager.gameObject.SetActive(false);
+        volumeMenu.gameObject.SetActive(false);
         pauseMenu.SetActive(true);
     }
 
@@ -224,7 +212,25 @@ public class UIManager : MonoBehaviour
 
     public void LoadMainMenu()
     {
-            StartCoroutine(LoadSceneCo(mainMenuSceneName));
+        StartCoroutine(LoadSceneCo(mainMenuSceneName));
+    }
+
+    public void StartLevel()
+    {
+        UpdateLives();
+        UpdateHP();
+        UpdateScore();
+
+        pauseMenu.SetActive(false);
+
+        volumeMenu.gameObject.SetActive(true);
+        theAVM.LoadSliderValues();
+        volumeMenu.gameObject.SetActive(false);
+
+        gameOverScreen.SetActive(false);
+        levelCopleteScreen.SetActive(false);
+        isGameOver = false;
+        isLevelComplete = false;
     }
 
     IEnumerator LoadSceneCo(string sceneName)

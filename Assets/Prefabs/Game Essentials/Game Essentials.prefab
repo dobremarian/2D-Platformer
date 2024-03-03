@@ -1868,7 +1868,6 @@ GameObject:
   - component: {fileID: 9012819122973466375}
   - component: {fileID: 9012819122973466374}
   - component: {fileID: 9012819122973466373}
-  - component: {fileID: 9012819122973466368}
   m_Layer: 5
   m_Name: Volume Menu
   m_TagString: Untagged
@@ -1959,22 +1958,6 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &9012819122973466368
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9012819122973466379}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d34b7094445db3946a5b1dbba3362ad6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  volumeMixer: {fileID: 24100000, guid: 170e1c29a010b6543970a6977d348ff0, type: 2}
-  gameSlider: {fileID: 9012819124817353646}
-  musicSlider: {fileID: 9012819123275853813}
-  sfxSlider: {fileID: 9012819123883866495}
 --- !u!1 &9012819122977128860
 GameObject:
   m_ObjectHideFlags: 0
@@ -3447,7 +3430,7 @@ GameObject:
   - component: {fileID: 9012819123225197215}
   - component: {fileID: 9012819123225197214}
   m_Layer: 5
-  m_Name: Music Volume Text
+  m_Name: Game Volume Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3652,7 +3635,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 9012819122973466368}
+      - m_Target: {fileID: 2029130555834723432}
         m_TargetAssemblyTypeName: AudioVolumeManager, Assembly-CSharp
         m_MethodName: SaveSliderValues
         m_Mode: 1
@@ -3813,7 +3796,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 9012819122973466368}
+      - m_Target: {fileID: 2029130555834723432}
         m_TargetAssemblyTypeName: AudioVolumeManager, Assembly-CSharp
         m_MethodName: SetMusicVolume
         m_Mode: 0
@@ -6260,7 +6243,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 9012819122973466368}
+      - m_Target: {fileID: 2029130555834723432}
         m_TargetAssemblyTypeName: AudioVolumeManager, Assembly-CSharp
         m_MethodName: SetSFXVolume
         m_Mode: 0
@@ -6949,7 +6932,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 9012819122973466368}
+      - m_Target: {fileID: 2029130555834723432}
         m_TargetAssemblyTypeName: AudioVolumeManager, Assembly-CSharp
         m_MethodName: LoadSliderValues
         m_Mode: 1
@@ -11876,7 +11859,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 9012819122973466368}
+      - m_Target: {fileID: 2029130555834723432}
         m_TargetAssemblyTypeName: AudioVolumeManager, Assembly-CSharp
         m_MethodName: SetGameVolume
         m_Mode: 0
@@ -12259,6 +12242,7 @@ GameObject:
   - component: {fileID: 9012819124924999161}
   - component: {fileID: 9012819124924999160}
   - component: {fileID: 9012819124924999167}
+  - component: {fileID: 2029130555834723432}
   m_Layer: 5
   m_Name: UI Canvas
   m_TagString: Untagged
@@ -12368,15 +12352,32 @@ MonoBehaviour:
   currentSceneName: Level_1
   levelSelectSceneName: Level_Select
   mainMenuSceneName: Main_Menu
+  gameCompleteSceneName: Game_Complete_Scene
   livesText: {fileID: 9012819123800084041}
   hpText: {fileID: 9012819124839397223}
   scoreText: {fileID: 9012819124800701308}
   gameUI: {fileID: 9012819123939550628}
   pauseMenu: {fileID: 9012819124228848165}
+  volumeMenu: {fileID: 9012819122973466379}
   fadeScreen: {fileID: 9012819122818547105}
   gameOverScreen: {fileID: 9012819123583921429}
   levelCopleteScreen: {fileID: 9012819123209321068}
-  theVolumeManager: {fileID: 9012819122973466368}
+--- !u!114 &2029130555834723432
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9012819124924999166}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d34b7094445db3946a5b1dbba3362ad6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  volumeMixer: {fileID: 24100000, guid: 170e1c29a010b6543970a6977d348ff0, type: 2}
+  gameSlider: {fileID: 9012819124817353646}
+  musicSlider: {fileID: 9012819123275853813}
+  sfxSlider: {fileID: 9012819123883866495}
 --- !u!1 &9012819124949739370
 GameObject:
   m_ObjectHideFlags: 0

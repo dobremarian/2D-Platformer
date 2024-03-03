@@ -175,6 +175,7 @@ public class GameManager : MonoBehaviour
     {
         thePlayer.CanMove = false;
         yield return new WaitForSeconds(0.5f);
+        theUiManager.StartLevel();
         theUiManager.FadeFromBlack();
         thePlayer.IsSpawning = true;
         yield return new WaitForSeconds(1.5f);
